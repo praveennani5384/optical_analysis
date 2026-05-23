@@ -1,0 +1,7 @@
+body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 20px; }
+.container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+h1 { text-align: center; color: #1a73e8; }
+.controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; }
+.chart-box { margin-bottom: 50px; }
+button { cursor: pointer; background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 4px; }
+button:hover { background: #1557b0; }
