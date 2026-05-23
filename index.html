@@ -5,60 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiDash - Professional Analytics</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 20px; color: #333; }
-        .container { max-width: 1100px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        h1 { text-align: center; color: #1a73e8; margin-bottom: 30px; }
-        .controls { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #e0e0e0; }
-        .control-group { display: flex; flex-direction: column; gap: 5px; }
-        label { font-size: 0.85rem; font-weight: bold; color: #666; }
-        select, input, button { padding: 10px; border-radius: 6px; border: 1px solid #ddd; outline: none; }
-        button { background: #1a73e8; color: white; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; padding: 10px 25px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; }
+        .container { max-width: 1100px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #1a73e8; font-size: 1.6rem; margin-bottom: 25px; }
+        
+        /* Responsive Controls Layout */
+        .controls { display: flex; flex-wrap: wrap; gap: 12px; background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; justify-content: center; }
+        .control-group { flex: 1 1 200px; display: flex; flex-direction: column; gap: 5px; min-width: 150px; }
+        
+        label { font-size: 0.75rem; font-weight: bold; color: #555; text-transform: uppercase; }
+        select, input, button { padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; width: 100%; box-sizing: border-box; outline: none; }
+        
+        button { background: #1a73e8; color: white; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: auto; }
         button:hover { background: #1557b0; }
-        .chart-box { margin-top: 40px; padding: 20px; border-top: 1px solid #eee; }
-        canvas { max-height: 450px; }
+
+        /* Chart Area Styling */
+        .chart-box { margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; }
+        .chart-container { position: relative; height: 400px; width: 100%; margin-bottom: 50px; }
+        h3 { font-size: 1.1rem; color: #333; border-left: 5px solid #1a73e8; padding-left: 12px; margin-bottom: 15px; }
+
+        /* Mobile View Adjustments */
+        @media (max-width: 600px) {
+            .controls { flex-direction: column; }
+            .control-group { width: 100%; }
+            .chart-container { height: 300px; }
+            h1 { font-size: 1.3rem; }
+        }
     </style>
+    <!-- Dependencies: Chart.js for visuals and XLSX for Excel parsing -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>OptiDash Analytics</h1>
+        <h1>OptiDash - Optical Analytics</h1>
         
         <div class="controls">
             <div class="control-group">
-                <label>Step 1: Upload Excel</label>
+                <label>1. Select Excel File</label>
                 <input type="file" id="upload" accept=".xlsx, .xls">
             </div>
             <div class="control-group">
-                <label>Category</label>
+                <label>2. Category</label>
                 <select id="filterCategory"><option value="">All Categories</option></select>
             </div>
             <div class="control-group">
-                <label>Brand</label>
+                <label>3. Brand</label>
                 <select id="filterBrand"><option value="">All Brands</option></select>
             </div>
             <div class="control-group">
-                <label>Year</label>
+                <label>4. Year</label>
                 <select id="filterYear"><option value="">All Years</option></select>
             </div>
             <div class="control-group">
-                <label>Month</label>
+                <label>5. Month</label>
                 <select id="filterMonth"><option value="">All Months</option></select>
             </div>
             <div class="control-group">
-                <label>&nbsp;</label>
                 <button id="processBtn">Generate Analytics</button>
             </div>
         </div>
 
         <div class="chart-box">
-            <h3>Monthly Sales Trend (Line Chart)</h3>
-            <canvas id="lineChart"></canvas>
+            <h3>Monthly Trends (Line Chart)</h3>
+            <div class="chart-container"><canvas id="lineChart"></canvas></div>
         </div>
         
         <div class="chart-box">
-            <h3>Inventory Distribution (Stacked Bar Chart)</h3>
-            <canvas id="barChart"></canvas>
+            <h3>Inventory Comparison (Stacked Bar Chart)</h3>
+            <div class="chart-container"><canvas id="barChart"></canvas></div>
         </div>
     </div>
     <script src="script.js"></script>
